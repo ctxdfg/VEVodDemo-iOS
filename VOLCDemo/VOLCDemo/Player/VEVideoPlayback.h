@@ -46,6 +46,8 @@ typedef NS_ENUM(NSInteger, VEVideoLoadState) {
 
 - (void)videoPlayerViewSizeDidChange:(id<VEVideoPlayback> _Nullable)player videoWidth:(NSInteger)videoWidth videoHeight:(NSInteger)videoHeight;
 
+- (void)videoPlayerViewSizeDidChange:(id<VEVideoPlayback> _Nullable)player timeIntervalDidChanged:(NSTimeInterval)interval;
+
 @end
 
 
@@ -70,11 +72,11 @@ typedef NS_ENUM(NSInteger, VEVideoLoadState) {
 @property (nonatomic, strong, nullable) NSString *playerTitle;
 
 
-/// Set play media source, initialization TTVideoEngine
+/// Set play media source, initialize TTVideoEngine
 /// @param mediaSource media source
 - (void)setMediaSource:(id<TTVideoEngineMediaSource> _Nonnull)mediaSource;
 
-/// Reset video engien, initialization TTVideoEngine,  example pre render
+/// Reset video engine, initialize TTVideoEngine, example pre render
 /// @param videoEngine  ttsdk video engine
 /// @param mediaSource  media source
 - (void)resetVideoEngine:(TTVideoEngine * _Nonnull)videoEngine

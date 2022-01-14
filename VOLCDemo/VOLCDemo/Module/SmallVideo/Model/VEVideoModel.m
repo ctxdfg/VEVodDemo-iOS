@@ -7,7 +7,7 @@
 //
 
 #import "VEVideoModel.h"
-#import "VEVideoPlayerViewController+Resolution.h"
+#import "VEVideoPlayerController+Resolution.h"
 #import "NSString+VE.h"
 #import "VEUserGlobalConfiguration.h"
 
@@ -29,7 +29,7 @@
 
 + (TTVideoEngineVidSource *)videoEngineVidSource:(VEVideoModel *)videoModel {
     TTVideoEngineEncodeType codec = [[VEUserGlobalConfiguration sharedInstance] isH265Enabled] ? TTVideoEngineh265 : TTVideoEngineH264;
-    TTVideoEngineVidSource *source = [[TTVideoEngineVidSource alloc] initWithVid:videoModel.videoId playAuthToken:videoModel.playAuthToken resolution:[VEVideoPlayerViewController getPlayerCurrentResolution] encodeType:codec isDash:NO isHLS:NO];
+    TTVideoEngineVidSource *source = [[TTVideoEngineVidSource alloc] initWithVid:videoModel.videoId playAuthToken:videoModel.playAuthToken resolution:[VEVideoPlayerController getPlayerCurrentResolution] encodeType:codec isDash:NO isHLS:NO];
     source.title = videoModel.title;
     source.cover = videoModel.coverUrl;
     return source;

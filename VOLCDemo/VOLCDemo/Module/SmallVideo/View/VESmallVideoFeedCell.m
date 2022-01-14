@@ -7,20 +7,17 @@
 //
 
 #import "VESmallVideoFeedCell.h"
-#import "VEVideoPlayerViewController.h"
 #import "VEVideoModel.h"
-#import "VESmallVideoPlaybackPanelViewController.h"
+#import "VESmallPlaybackViewController.h"
+#import "TTVideoEngineVidSource.h"
 
-@interface VESmallVideoFeedCell ()
+@interface VESmallVideoFeedCell () <VESmallPlayDataSouce>
 
-@property (nonatomic, strong) VEVideoPlayerViewController *playerViewController;
-@property (nonatomic, strong) VEVideoModel *videoModel;
+@property (nonatomic, strong) VESmallPlaybackViewController *playerViewController;
 
 @end
 
 @implementation VESmallVideoFeedCell
-
-@synthesize indexPath;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -32,40 +29,41 @@
 }
 
 
-#pragma mark - UI
+#pragma mark ----- UI
 
 - (void)configuratoinCustomView {
-    _playerViewController = [[VEVideoPlayerViewController alloc] init];
-    
-    VESmallVideoPlaybackPanelViewController *playerControlViewContorller = [[VESmallVideoPlaybackPanelViewController alloc] initWithVideoPlayer:_playerViewController];
-    [_playerViewController registePlaybackPanelController:playerControlViewContorller];
-    
-    [self.contentView addSubview:_playerViewController.view];
-    [_playerViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.playerViewController = [VESmallPlaybackViewController new];
+    self.playerViewController.dataSource = self;
+    [self.contentView addSubview:self.playerViewController.view];
+    [self.playerViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
 }
 
 
-#pragma mark - Public
+#pragma mark ----- VEVideoFeedViewCellProtocol
 
-- (void)configWithVideoModel:(VEVideoModel *)videoModel {
-    self.videoModel = videoModel;
-    NSLog(@"update data index ==== %@", @(self.indexPath));
-    [self.playerViewController loadBackgourdImageWithMediaSource:[VEVideoModel videoEngineVidSource:videoModel]];
+- (void)shouldPlay {
+    [self.playerViewController reloadData];
 }
 
-- (void)play {
-    NSLog(@"play index ==== %@", @(self.indexPath));
-    [self.playerViewController playWithMediaSource:[VEVideoModel videoEngineVidSource:self.videoModel]];
+- (void)shouldStop {
+    [self.playerViewController stopSession];
 }
 
-- (void)stop {
-    [self.playerViewController stop];
+- (void)shouPause {
+    
 }
 
-- (void)pause {
-    [self.playerViewController pause];
+
+#pragma mark ----- VESmallPlayDataSouce
+
+- (TTVideoEngineVidSource *)playSource {
+    return [VEVideoModel videoEngineVidSource:self.videoModel];
+}
+
+- (NSString *)playTitle {
+    return self.videoModel.title;
 }
 
 @end

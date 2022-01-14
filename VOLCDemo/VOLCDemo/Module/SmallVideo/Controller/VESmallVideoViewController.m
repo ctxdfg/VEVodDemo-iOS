@@ -7,7 +7,7 @@
 //
 
 #import "VESmallVideoViewController.h"
-#import "VEVideoPlayerViewController.h"
+#import "VEVideoPlayerController.h"
 #import "VEUserGlobalConfigViewController.h"
 #import "UITableView+VE.h"
 #import "VECustomHeaderView.h"
@@ -195,19 +195,16 @@ NSString * const kSmallVideoFeedCellIdentifier = @"kSmallVideoFeedCellIdentifier
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VESmallVideoFeedCell *cell = [tableView dequeueReusableCellWithIdentifier:kSmallVideoFeedCellIdentifier];
-    if (!cell) {
-        cell = [[VESmallVideoFeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSmallVideoFeedCellIdentifier];
-    }
-    if (cell) {
-        cell.indexPath = indexPath.row;
-        [cell configWithVideoModel:[self.videoModels objectAtIndex:indexPath.row]];
-    }
+    cell.videoModel = [self.videoModels objectAtIndex:indexPath.row];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     self.willPlayIndexPath = indexPath;
-    [(VESmallVideoFeedCell *)cell configWithVideoModel:[self.videoModels objectAtIndex:indexPath.row]];
+    VEVideoModel *videoModel = [self.videoModels objectAtIndex:indexPath.row];
+    if ([cell respondsToSelector:@selector(setVideoModel:)]) {
+        [cell performSelector:@selector(setVideoModel:) withObject:videoModel];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -265,7 +262,7 @@ NSString * const kSmallVideoFeedCellIdentifier = @"kSmallVideoFeedCellIdentifier
     [super close];
     [TTVideoEngine clearAllEngineStrategy];
     if (self.currentPlayCell) {
-        [self.currentPlayCell stop];
+        [self.currentPlayCell shouldStop];
     }
 }
 
@@ -290,10 +287,10 @@ NSString * const kSmallVideoFeedCellIdentifier = @"kSmallVideoFeedCellIdentifier
     if (indexPath && indexPath.row < self.videoModels.count) {
         VESmallVideoFeedCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         if (self.currentPlayCell) {
-            [self.currentPlayCell stop];
+            [self.currentPlayCell shouldStop];
         }
         
-        [cell play];
+        [cell shouldPlay];
         self.currentPlayCell = cell;
         self.currentPlayIndexPath = indexPath;
     }
@@ -304,7 +301,7 @@ NSString * const kSmallVideoFeedCellIdentifier = @"kSmallVideoFeedCellIdentifier
         return;
     }
     if (self.currentPlayIndexPath.row != [self.tableView currentIndexPathForFullScreenCell].row) {
-        [self.currentPlayCell stop];
+        [self.currentPlayCell shouldStop];
     }
     
     [self __play];

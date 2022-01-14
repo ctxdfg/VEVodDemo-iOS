@@ -14,17 +14,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol VEVideoFeedViewCellProtocol
 
-@property (nonatomic, assign) NSInteger indexPath;
+- (void)shouldPlay;
 
-- (void)configWithVideoModel:(VEVideoModel *)videoModel;
-- (void)play;
-- (void)stop;
-- (void)pause;
+- (void)shouldStop;
+
+- (void)shouPause;
 
 @end
 
 @interface VESmallVideoFeedCell : UITableViewCell <VEVideoFeedViewCellProtocol>
 
+@property (nonatomic, strong) VEVideoModel *videoModel;
 
 @end
 

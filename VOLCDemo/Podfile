@@ -5,8 +5,9 @@ source 'https://github.com/volcengine/volcengine-specs.git'
 
 platform :ios, '9.0'
 
-target 'VOLCDemo' do
-  pod 'TTSDK', '1.23.1.4-premium', :subspecs => ['Player']
+target 'VOLCDemo' do    
+  pod 'TTSDK', '1.23.2.1-premium', :subspecs => ['Player']
+  pod 'VEPlayerUIModule', :path=> './VEPlayerUIModule/'
   pod 'Masonry'
   pod 'SDWebImage'
   pod 'MBProgressHUD', '~> 1.2.0'
@@ -15,3 +16,8 @@ target 'VOLCDemo' do
   
 end
 
+# post_install do |installer|
+#   installer.pods_project.build_configurations.each do |config|
+#   config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+#   end
+# end

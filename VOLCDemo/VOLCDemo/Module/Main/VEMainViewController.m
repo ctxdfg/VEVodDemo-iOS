@@ -7,6 +7,7 @@
 
 #import "VEMainViewController.h"
 #import "VESmallVideoViewController.h"
+#import "VELongVideoViewController.h"
 #import "UIButton+MainViewItem.h"
 #import "VEUserGlobalConfigViewController.h"
 
@@ -41,6 +42,14 @@
         make.height.mas_equalTo(btnHeight);
     }];
     
+    UIButton *longVideoButton = [UIButton __newButtonWithTitle:NSLocalizedString(@"title_long_video", nil) icon:@"icon_long" target:self action:@selector(__handleButtonClicked:) type:SenceButtonTypeLongVideo];
+    [self.view addSubview:longVideoButton];
+    [longVideoButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(smallVideoButton.mas_top);//207
+        make.leading.equalTo(smallVideoButton.mas_trailing).with.offset(div);
+        make.width.mas_equalTo(btnWidth);
+        make.height.mas_equalTo(btnHeight);
+    }];
     
     [self.view addSubview:self.cleanMDLCacheButton];
     [self.cleanMDLCacheButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -55,12 +64,21 @@
 - (void)__handleButtonClicked:(UIButton *)sender {
     switch (sender.tag) {
         case SenceButtonTypeSmallVideo: {
-            VEUserGlobalConfigViewController *configViewController = [[VEUserGlobalConfigViewController alloc] initWithSence:VESenceType_SmallVideo];
-            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:configViewController];
-            navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
-            [self presentViewController:navigationController animated:YES completion:^{}];
+            VESmallVideoViewController *smallVideoController = [[VESmallVideoViewController alloc] init];
+            UINavigationController *smallVideoNavigationController = [[UINavigationController alloc] initWithRootViewController:smallVideoController];
+            smallVideoNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
+            [self presentViewController:smallVideoNavigationController animated:YES completion:^{}];
         }
             break;
+            
+        case SenceButtonTypeLongVideo: {
+            VELongVideoViewController *longVideoController = [[VELongVideoViewController alloc] init];
+            UINavigationController *longVideoNavigationController = [[UINavigationController alloc] initWithRootViewController:longVideoController];
+            longVideoNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
+            [self presentViewController:longVideoNavigationController animated:YES completion:^{}];
+        }
+            break;
+            
         default:{
         }
             break;

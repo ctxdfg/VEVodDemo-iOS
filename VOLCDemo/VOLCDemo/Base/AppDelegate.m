@@ -60,6 +60,28 @@ FOUNDATION_EXTERN NSString * const TTLicenseNotificationLicenseResultKey;
     [TTVideoEngine startOpenGLESActivity];
 }
 
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    if (self.screenDirection == UIInterfaceOrientationLandscapeRight) {
+        return UIInterfaceOrientationMaskLandscapeRight;
+    } else {
+        return UIInterfaceOrientationMaskPortrait;
+    }
+}
+
+- (void)forceRotate {
+    // 只考虑landscape right 和 portrait
+    UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;
+    UIInterfaceOrientation destinationOrientation = UIInterfaceOrientationUnknown;
+    if (currentOrientation == UIInterfaceOrientationPortrait) {
+        destinationOrientation = UIInterfaceOrientationLandscapeRight;
+    } else {
+        destinationOrientation = UIInterfaceOrientationPortrait;
+    }
+    self.screenDirection = destinationOrientation;
+    [[UIDevice currentDevice] setValue:@(destinationOrientation) forKey:@"orientation"];
+    [UIViewController attemptRotationToDeviceOrientation];
+}
+
 
 #pragma mark - TTSDK init
 
