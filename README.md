@@ -66,13 +66,13 @@ pod 'TTSDK', 'x.x.x.x', :subspecs => [ # 推荐使用最新稳定版，具体版
 ## 控件层快速开始
 首先请查看[控件层使用](https://bytedance.feishu.cn/docx/doxcnqF1Y9NIzOQH0m8OVQ0cPFo)，如果你想快速开始，那么只需使用 ./VEPlayerUIModule/Classes/Example/ 下的范例使用方式。
 
-1. 集成代码
+### 1. 集成代码
 将VEUIModule源码引入工程，然后在Podfile中添加对应对应条目。
 ```
 pod 'VEPlayerUIModule', :path=> './VEPlayerUIModule/'
 ```
 
-2. 前置条件（以TTVideoEngine为范例）
+### 2. 前置条件（以TTVideoEngine为范例）
 实现 VEPlayCoreAbilityProtocol
 
 ```
@@ -201,11 +201,10 @@ pod 'VEPlayerUIModule', :path=> './VEPlayerUIModule/'
 @end
 ```
 
-3. 选择代码中调用方式
-
-  Class-Method方式
-    涉及的类： VEInterfacePlayElement，VEInterfaceProgressElement，VEInterfaceSimpleMethodSceneConf
-    只需在对应业务中添加 playerControlView，这是一个播控能力View。
+### 3. 选择代码中调用方式
+#### Class-Method方式
+涉及的类： VEInterfacePlayElement，VEInterfaceProgressElement，VEInterfaceSimpleMethodSceneConf
+只需在对应业务中添加 playerControlView，这是一个播控能力View。
 
 ```
 #import <VEPlayerUIModule/VEPlayerUIModule.h>
@@ -220,9 +219,9 @@ pod 'VEPlayerUIModule', :path=> './VEPlayerUIModule/'
 }
 ```
 
-  Method-Block方式
-    涉及的类： VEInterfaceSimpleBlockSceneConf
-    只需在对应业务中添加 playerControlView，这是一个播控能力View。
+#### Method-Block方式
+涉及的类： VEInterfaceSimpleBlockSceneConf
+只需在对应业务中添加 playerControlView，这是一个播控能力View。
 ```
 #import <VEPlayerUIModule/VEPlayerUIModule.h>
 #import "VEInterfaceSimpleBlockSceneConf.h"
