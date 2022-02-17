@@ -62,16 +62,18 @@ pod 'TTSDK', 'x.x.x.x', :subspecs => [ # 推荐使用最新稳定版，具体版
 
 
 ###控件层快速开始
-首先请查看iOS开源控件层使用指南 ，如果你想快速开始，那么只需使用./VEPlayerUIModule/Classes/Example/下的范例使用方式。
+首先请查看[控件层使用] ，如果你想快速开始，那么只需使用./VEPlayerUIModule/Classes/Example/下的范例使用方式。
 
 集成代码
 将VEUIModule源码引入工程，然后在Podfile中添加对应对应条目。
+```
 pod 'VEPlayerUIModule', :path=> './VEPlayerUIModule/'
+```
 
 前置条件（以TTVideoEngine为范例）
 实现 VEPlayCoreAbilityProtocol
 
-> VEVideoPlayerControllera
+```
 @implementation VEVideoPlayerController (VEPlayCoreAbility)
 
 #pragma mark ----- origin class implementated
@@ -114,11 +116,8 @@ pod 'VEPlayerUIModule', :path=> './VEPlayerUIModule/'
 
 - (void)seek:(NSTimeInterval)destination {
     if (destination > 0.00) {
-        NSLog(@"zxy time inner interval = %lf", destination);
         [self seekToTime:destination complete:^(BOOL success) {
-            NSLog(@"call seek succeed");
         } renderComplete:^{
-            NSLog(@"render succeed after seek");
         }];
     }
 }
@@ -190,57 +189,6 @@ pod 'VEPlayerUIModule', :path=> './VEPlayerUIModule/'
         case TTVideoEngineResolutionType1080P:
             resolutionTitle = @"1080";
             break;
-        case TTVideoEngineResolutionType4K:
-            resolutionTitle = @"4K";
-            break;
-        case TTVideoEngineResolutionTypeABRAuto:
-            resolutionTitle = @"ABR自动";
-            break;
-        case TTVideoEngineResolutionTypeAuto:
-            resolutionTitle = @"自动";
-            break;
-        case TTVideoEngineResolutionTypeUnknown:
-            resolutionTitle = @"未知";
-            break;
-        case TTVideoEngineResolutionTypeHDR:
-            resolutionTitle = @"HDR";
-            break;
-        case TTVideoEngineResolutionTypeHDR_240P:
-            resolutionTitle = @"240p HDR";
-            break;
-        case TTVideoEngineResolutionTypeHDR_360P:
-            resolutionTitle = @"360p HDR";
-            break;
-        case TTVideoEngineResolutionTypeHDR_480P:
-            resolutionTitle = @"480p HDR";
-            break;
-        case TTVideoEngineResolutionTypeHDR_540P:
-            resolutionTitle = @"540p HDR";
-            break;
-        case TTVideoEngineResolutionTypeHDR_720P:
-            resolutionTitle = @"720p HDR";
-            break;
-        case TTVideoEngineResolutionTypeHDR_1080P:
-            resolutionTitle = @"1080p HDR";
-            break;
-        case TTVideoEngineResolutionTypeHDR_2K:
-            resolutionTitle = @"2k HDR";
-            break;
-        case TTVideoEngineResolutionTypeHDR_4K:
-            resolutionTitle = @"4k HDR";
-            break;
-        case TTVideoEngineResolutionType2K:
-            resolutionTitle = @"2k";
-            break;
-        case TTVideoEngineResolutionType1080P_120F:
-            resolutionTitle = @"1080P_120F";
-            break;
-        case TTVideoEngineResolutionType2K_120F:
-            resolutionTitle = @"2K_120F";
-            break;
-        case TTVideoEngineResolutionType4K_120F:
-            resolutionTitle = @"4K_120F";
-            break;
         default:
             resolutionTitle = @"默认";
             break;
@@ -249,10 +197,13 @@ pod 'VEPlayerUIModule', :path=> './VEPlayerUIModule/'
 }
 
 @end
+```
 
 Class-Method方式
 涉及的类： VEInterfacePlayElement，VEInterfaceProgressElement，VEInterfaceSimpleMethodSceneConf
 只需在对应业务中添加 playerControlView，这是一个播控能力View。
+
+```
 #import <VEPlayerUIModule/VEPlayerUIModule.h>
 #import "VEInterfaceSimpleMethodSceneConf.h"
 
@@ -263,10 +214,12 @@ Class-Method方式
     }
     return _playerControlView;
 }
+```
 
 Method-Block方式
 涉及的类： VEInterfaceSimpleBlockSceneConf
 只需在对应业务中添加 playerControlView，这是一个播控能力View。
+```
 #import <VEPlayerUIModule/VEPlayerUIModule.h>
 #import "VEInterfaceSimpleBlockSceneConf.h"
 
@@ -277,8 +230,7 @@ Method-Block方式
     }
     return _playerControlView;
 }
-
-
+```
 
 
 
