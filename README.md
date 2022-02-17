@@ -204,8 +204,8 @@ pod 'VEPlayerUIModule', :path=> './VEPlayerUIModule/'
 3. 选择代码中调用方式
 
 Class-Method方式
-涉及的类： VEInterfacePlayElement，VEInterfaceProgressElement，VEInterfaceSimpleMethodSceneConf
-只需在对应业务中添加 playerControlView，这是一个播控能力View。
+    涉及的类： VEInterfacePlayElement，VEInterfaceProgressElement，VEInterfaceSimpleMethodSceneConf
+    只需在对应业务中添加 playerControlView，这是一个播控能力View。
 
 ```
 #import <VEPlayerUIModule/VEPlayerUIModule.h>
@@ -221,8 +221,8 @@ Class-Method方式
 ```
 
 Method-Block方式
-涉及的类： VEInterfaceSimpleBlockSceneConf
-只需在对应业务中添加 playerControlView，这是一个播控能力View。
+    涉及的类： VEInterfaceSimpleBlockSceneConf
+    只需在对应业务中添加 playerControlView，这是一个播控能力View。
 ```
 #import <VEPlayerUIModule/VEPlayerUIModule.h>
 #import "VEInterfaceSimpleBlockSceneConf.h"
