@@ -64,7 +64,7 @@ pod 'TTSDK', 'x.x.x.x', :subspecs => [ # 推荐使用最新稳定版，具体版
 
 ------------------------------------------------
 ## 控件层快速开始
-首先请查看[控件层使用] ，如果你想快速开始，那么只需使用./VEPlayerUIModule/Classes/Example/下的范例使用方式。
+首先请查看[控件层使用](https://bytedance.feishu.cn/docx/doxcnqF1Y9NIzOQH0m8OVQ0cPFo) ，如果你想快速开始，那么只需使用./VEPlayerUIModule/Classes/Example/下的范例使用方式。
 
 集成代码
 将VEUIModule源码引入工程，然后在Podfile中添加对应对应条目。
