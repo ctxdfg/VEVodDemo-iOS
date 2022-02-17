@@ -70,6 +70,8 @@ pod 'VEPlayerUIModule', :path=> './VEPlayerUIModule/'
 
 前置条件（以TTVideoEngine为范例）
 实现 VEPlayCoreAbilityProtocol
+
+> VEVideoPlayerControllera
 @implementation VEVideoPlayerController (VEPlayCoreAbility)
 
 #pragma mark ----- origin class implementated
